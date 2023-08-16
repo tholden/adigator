@@ -109,6 +109,8 @@ switch callerstr
     dydx = ['(1/2)./sqrt(',x,')'];
   case 'log'
     dydx = ['1./',x];
+  case 'log1p'
+    dydx = ['1./(1+',x,')'];
   case 'log10'
     dydx = ['1./log(10)./',x];
   case 'sin'

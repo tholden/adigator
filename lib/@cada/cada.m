@@ -291,6 +291,10 @@ classdef cada
       % CADA overloaded LOG function
       y = cadaunarymath(x,0,'log');
     end
+    function y = log1p(x)
+      % CADA overloaded LOG function
+      y = cadaunarymath(x,0,'log1p');
+    end
     function y = log10(x)
       % CADA overloaded LOG10 function
       y = cadaunarymath(x,0,'log10');
@@ -446,6 +450,12 @@ classdef cada
       % CADA overloaded MINUS function
       z = cadabinaryarraymath(x,y,0,0,'minus');
     end
+      function z = tinv(x,y)
+          z = cadabinaryarraymath(x,y,0,0,'tinv');
+      end
+      function z = betaln(x,y)
+          z = cadabinaryarraymath(x,y,0,0,'betaln');
+      end
     [y,varargout] = max(x,varargin)
     [y,varargout] = min(x,varargin)
   end

@@ -647,6 +647,10 @@ switch callerstr
     dz = ['(',x,' == max(',x,',',y,')).*',dx];
   case 'min'
     dz = ['(',x,' == min(',x,',',y,')).*',dx];
+  case 'tinv'
+    dz = ['(1./tpdf(',x,',',y,')).*',dx];
+  case 'betaln'
+    dz = ['(psi(',x,')-psi(',x,'+',y,')).*',dx];
   otherwise
     error(['no derivative rule defined for function: ',callerstr])
 end
@@ -675,6 +679,10 @@ switch callerstr
     dz = ['(',y,' == max(',x,',',y,')).*',dy];
   case 'min'
     dz = ['(',y,' == min(',x,',',y,')).*',dy];
+  case 'tinv'
+    dz = ['((tinv(',x,',',y,'+1e-6)-tinv(',x,',',y,'-1e-6))/2e-6).*',dy];
+  case 'betaln'
+    dz = ['(psi(',y,')-psi(',x,'+',y,')).*',dy];
   otherwise
     error(['no derivative rule defined for function: ',callerstr])
 end
