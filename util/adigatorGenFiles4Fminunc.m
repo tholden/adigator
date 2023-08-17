@@ -78,8 +78,8 @@ else
   opts.overwrite = 1;
 end
 if isfield(setup,'auxdata')
-  if nargin(ObjFun) ~= 2
-    error('if auxdata specified, objective function must have 2 inputs')
+  if nargin(ObjFun) == 1
+    error('if auxdata specified, objective function must have at least 2 inputs')
   end
   auxflag = 1;
   auxdata = setup.auxdata;
@@ -131,7 +131,10 @@ end
 % ------------------------ Differentiate Objective File ----------------- %
 x = adigatorCreateDerivInput([n 1],'x');
 if auxflag
-  Inputs = {x, auxdata};
+  if ~iscell( auxdata )
+      auxdata = { auxdata };
+  end
+  Inputs = [{x}, auxdata];
 else
   Inputs = {x};
 end
@@ -150,8 +153,8 @@ end
 
 % -------------------------- Create Necessary Files --------------------- %
 if auxflag
-  InVarStr  = 'x,auxdata';
-  dInVarStr = 'gx,auxdata';
+  InVarStr  = 'x,auxdata{:}';
+  dInVarStr = 'gx,auxdata{:}';
 else
   InVarStr  = 'x';
   dInVarStr = 'gx';
@@ -238,7 +241,7 @@ rehash
 % -------------------------- Create Function Calls ---------------------- %
 
 if auxflag
-  func = eval(['@(x)',HesFileName,'(x,auxdata)']);
+  func = eval(['@(x)',HesFileName,'(x,auxdata{:})']);
 else
   func = str2func(HesFileName);
 end
