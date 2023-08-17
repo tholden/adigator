@@ -692,7 +692,7 @@ if ADIGATOR.OPTIONS.UNROLL
 end
 fprintf(Dfid,'\n\nfunction ADiGator_LoadData()\n');
 fprintf(Dfid,['global ADiGator_',ADIGATOR.PRINT.FILENAME,'\n']);
-fprintf(Dfid,['ADiGator_',ADIGATOR.PRINT.FILENAME,' = load(''',...
+fprintf(Dfid,['ADiGator_',ADIGATOR.PRINT.FILENAME,' = coder.load(''',...
   ADIGATOR.PRINT.FILENAME,'.mat'');\n']);
 fprintf(Dfid,'return\nend');
 
