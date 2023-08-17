@@ -462,9 +462,9 @@ ADiGatorstruc.(sprintf('Gator%1.0dData',ADIGATOR.DERNUMBER)) = ADIGATORDATA.DATA
 ADiGatorCallingDir = cd;
 eval([ADiGatorFunName,' = ADiGatorstruc;']);
 if ~exist([ADiGatorCallingDir,filesep,ADiGatorMatFileName,'.mat'],'file');
-  save([ADiGatorCallingDir,filesep,ADiGatorMatFileName,'.mat'],ADiGatorFunName);
+  save([ADiGatorCallingDir,filesep,ADiGatorMatFileName,'.mat'],ADiGatorFunName,'-v7.3');
 else
-  save([ADiGatorCallingDir,filesep,ADiGatorMatFileName,'.mat'],ADiGatorFunName,'-append');
+  save([ADiGatorCallingDir,filesep,ADiGatorMatFileName,'.mat'],ADiGatorFunName,'-v7.3','-append');
 end
 rehash
 end
