@@ -153,18 +153,18 @@ end
 
 % -------------------------- Create Necessary Files --------------------- %
 if auxflag
-  InVarStr  = 'x,auxdata{:}';
-  dInVarStr = 'gx,auxdata{:}';
+  InVarStr  = 'x,varargin{:}';
+  dInVarStr = 'gx,varargin{:}';
 else
-  InVarStr  = 'x';
-  dInVarStr = 'gx';
+  InVarStr  = 'x   ';
+  dInVarStr = 'gx   ';
 end
 
 Hfid = fopen([HesFileName,'.m'],'w+');
 if order == 2
-  fprintf(Hfid,['function [f, g, h] = ',HesFileName,'(',InVarStr,')\n']);
+  fprintf(Hfid,['function [f, g, h] = ',HesFileName,'(',InVarStr(1:(end-2)),')\n']);
 else
-  fprintf(Hfid,['function [f, g] = ',HesFileName,'(',InVarStr,')\n']);
+  fprintf(Hfid,['function [f, g] = ',HesFileName,'(',InVarStr(1:(end-2)),')\n']);
 end
 
 % Print Function Header
