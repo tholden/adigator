@@ -107,24 +107,30 @@ if DPflag == 1
         INDEXNAME = sprintf('Gator%1.0dData',ADIGATOR.DERNUMBER);
         % previous deriv vector or scaler (is second or subsequent
         % derivative, so won't have any higher dimension than vector
+        Position = ftell( fid );
+        fseek( fid, 0, 'bof' );
+        Text = fread( fid, '*char' ).';
+        fseek( fid, Position, 'bof' );
+        PreviousSize = regexp( Text, ['(?<=',PrevDerName,'_size\s*=\s*).*?(?=;)'], 'match', 'once' );
+        PreviousLocation = regexp( Text, ['(?<=',PrevDerName,'_location\s*=\s*).*?(?=;)'], 'match', 'once' );
         if VMrow == 1 && VNcol == 1
           % scalar variable
-          fprintf(fid,[indent,DerName,'_size = ',PrevDerName,'_size;\n']);
+          fprintf(fid,[indent,DerName,'_size = ',PreviousSize,';\n']);
           Dind1 = cadaindprint(DerIndex);
-          fprintf(fid,[indent,DerName,'_location = ',PrevDerName,'_location(',Dind1,',:);\n']);
+          fprintf(fid,[indent,DerName,'_location = ',PreviousLocation,'(',Dind1,',:);\n']);
         elseif VMrow == 1 || VNcol == 1
           % vector variable
-          fprintf(fid,[indent,DerName,'_size = [',PrevDerName,'_size,%1.0d];\n'],VMrow*VNcol);
+          fprintf(fid,[indent,DerName,'_size = [',PreviousSize,',%1.0d];\n'],VMrow*VNcol);
           LocationEnd = zeros(nzd,1);
           [TempDer,LocationEnd(:)] = ind2sub([xMrow*xNcol,VMrow*VNcol],DerIndex);
           Dind1 = cadaindprint(TempDer);
           ADIGATORDATA.INDEXCOUNT = ADIGATORDATA.INDEXCOUNT+1;
           IndName = sprintf('Index%1.0d',ADIGATORDATA.INDEXCOUNT);
           ADIGATORDATA.DATA.(IndName) = LocationEnd;
-          fprintf(fid,[indent,DerName,'_location = [',PrevDerName,'_location(',Dind1,',:), ',INDEXNAME,'.',IndName,'];\n']);
+          fprintf(fid,[indent,DerName,'_location = [',PreviousLocation,'(',Dind1,',:), ',INDEXNAME,'.',IndName,'];\n']);
         else
           % matrix variable
-          fprintf(fid,[indent,DerName,'_size = [',PrevDerName,'_size,%1.0d,%1.0d];\n'],VMrow,VNcol);
+          fprintf(fid,[indent,DerName,'_size = [',PreviousSize,',%1.0d,%1.0d];\n'],VMrow,VNcol);
           LocationEnd = zeros(nzd,2);
           [DerIndex,DerIndex2] = ind2sub([xMrow*xNcol,VMrow*VNcol],DerIndex);
           [LocationEnd(:,1),LocationEnd(:,2)] = ind2sub([VMrow,VNcol],DerIndex2);
@@ -132,7 +138,7 @@ if DPflag == 1
           ADIGATORDATA.INDEXCOUNT = ADIGATORDATA.INDEXCOUNT+1;
           IndName = sprintf('Index%1.0d',ADIGATORDATA.INDEXCOUNT);
           ADIGATORDATA.DATA.(IndName) = LocationEnd;
-          fprintf(fid,[indent,DerName,'_location = [',PrevDerName,'_location(',Dind1,',:), ',INDEXNAME,'.',IndName,'];\n']);
+          fprintf(fid,[indent,DerName,'_location = [',PreviousLocation,'(',Dind1,',:), ',INDEXNAME,'.',IndName,'];\n']);
         end
       end
     end
