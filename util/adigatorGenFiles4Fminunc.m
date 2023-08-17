@@ -162,9 +162,9 @@ end
 
 Hfid = fopen([HesFileName,'.m'],'w+');
 if order == 2
-  fprintf(Hfid,['function [f, g, h] = ',HesFileName,'(',InVarStr(1:(end-2)),')\n']);
+  fprintf(Hfid,['function [f, g, h] = ',HesFileName,'(',InVarStr(1:(end-3)),')\n']);
 else
-  fprintf(Hfid,['function [f, g] = ',HesFileName,'(',InVarStr(1:(end-2)),')\n']);
+  fprintf(Hfid,['function [f, g] = ',HesFileName,'(',InVarStr(1:(end-3)),')\n']);
 end
 
 % Print Function Header
