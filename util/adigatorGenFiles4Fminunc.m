@@ -101,7 +101,7 @@ end
 % --------------------------- Set Up File Names ------------------------- %
 ObjD1FileName  = [ObjFunName,'_ADiGatorGrd'];    % Obj 1st derivs
 % 2nd derivs
-if order
+if order == 2
   HesFileName   = [ObjFunName,'_Hes'];             % Hessian Wrapper
   ObjD2FileName = [ObjFunName,'_ADiGatorHes'];     % Obj 2nd derivs
   AllFileNames = {ObjD1FileName, HesFileName, ObjD2FileName};
