@@ -292,8 +292,12 @@ classdef cada
       y = cadaunarymath(x,0,'log');
     end
     function y = log1p(x)
-      % CADA overloaded LOG function
+      % CADA overloaded LOG1P function
       y = cadaunarymath(x,0,'log1p');
+    end
+    function y = psi(x)
+      % CADA overloaded PSI function
+      y = cadaunarymath(x,0,'psi');
     end
     function y = log10(x)
       % CADA overloaded LOG10 function
