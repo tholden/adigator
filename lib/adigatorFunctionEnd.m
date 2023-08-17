@@ -464,7 +464,7 @@ eval([ADiGatorFunName,' = ADiGatorstruc;']);
 if ~exist([ADiGatorCallingDir,filesep,ADiGatorMatFileName,'.mat'],'file');
   save([ADiGatorCallingDir,filesep,ADiGatorMatFileName,'.mat'],ADiGatorFunName,'-v7.3');
 else
-  save([ADiGatorCallingDir,filesep,ADiGatorMatFileName,'.mat'],ADiGatorFunName,'-v7.3','-append');
+  save([ADiGatorCallingDir,filesep,ADiGatorMatFileName,'.mat'],ADiGatorFunName,'-append');
 end
 rehash
 end
