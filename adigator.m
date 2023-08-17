@@ -210,7 +210,7 @@ for CFcount = 1:NUMcf
   fgets(FID); MajorLineCount = MajorLineCount+1;
   BreakFlag     = 0; 
   PrevDerFlag   = 0; 
-  PrevDerString = ['global ADiGator_',FILENAME]; 
+  PrevDerString = ['ADiGator_',FILENAME,'=coder.load(''',FILENAME,'.mat'');']; 
   while ~BreakFlag
     FunLine = strtrim(fgets(FID));
     MajorLineCount = MajorLineCount+1;
@@ -690,15 +690,15 @@ if ADIGATOR.OPTIONS.UNROLL
     end
   end
 end
-fprintf(Dfid,'\n\nfunction ADiGator_LoadData()\n');
-fprintf(Dfid,['global ADiGator_',ADIGATOR.PRINT.FILENAME,'\n']);
-fprintf(Dfid,['ADiGator_',ADIGATOR.PRINT.FILENAME,' = coder.load(''',...
-  ADIGATOR.PRINT.FILENAME,'.mat'');\n']);
-fprintf(Dfid,'return\nend');
-
-eval(['global ADiGator_',ADIGATOR.PRINT.FILENAME]);
-eval(['ADiGator_',ADIGATOR.PRINT.FILENAME,' = load(''',...
-  ADIGATOR.PRINT.FILENAME,'.mat'');']);
+% fprintf(Dfid,'\n\nfunction ADiGator_LoadData()\n');
+% fprintf(Dfid,['global ADiGator_',ADIGATOR.PRINT.FILENAME,'\n']);
+% fprintf(Dfid,['ADiGator_',ADIGATOR.PRINT.FILENAME,' = coder.load(''',...
+%   ADIGATOR.PRINT.FILENAME,'.mat'');\n']);
+% fprintf(Dfid,'return\nend');
+% 
+% eval(['global ADiGator_',ADIGATOR.PRINT.FILENAME]);
+% eval(['ADiGator_',ADIGATOR.PRINT.FILENAME,' = load(''',...
+%   ADIGATOR.PRINT.FILENAME,'.mat'');']);
 
 fclose('all');
 if ADIGATOR.OPTIONS.ECHO

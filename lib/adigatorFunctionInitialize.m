@@ -998,8 +998,8 @@ if FunID == 1
   % Main Function
   FileName    = ADIGATOR.PRINT.FILENAME;
   fprintf(fid,['function ',OutStr,' = ',FileName,'(',InStr(1:end-1),')\n']);
-  fprintf(fid,['global ',MatFileName,'\n']);
-  fprintf(fid,['if isempty(',MatFileName,'); ADiGator_LoadData(); end\n']);
+  fprintf(fid,[MatFileName,'=coder.load(''',ADIGATOR.PRINT.FILENAME,'.mat'');\n']);
+  % fprintf(fid,['if isempty(',MatFileName,'); ADiGator_LoadData(); end\n']);
 else
   if FunctionInfo(FunID).DERNUMBER > 1
     FileName = FunctionInfo(FunID).File.Name;
@@ -1018,7 +1018,7 @@ else
   else
     fprintf(fid,['function ',OutStr,' = ',FileName,'(',InStr(1:end-1),')\n']);
   end
-  fprintf(fid,['global ',MatFileName,'\n']);
+  fprintf(fid,[MatFileName,'=coder.load(''',ADIGATOR.PRINT.FILENAME,'.mat'');\n']);
 end
 % Print Data References
 for Dcount = 1:ADIGATOR.DERNUMBER
