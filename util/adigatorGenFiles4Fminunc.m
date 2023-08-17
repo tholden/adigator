@@ -241,7 +241,7 @@ rehash
 % -------------------------- Create Function Calls ---------------------- %
 
 if auxflag
-  func = eval(['@(x)',HesFileName,'(x,auxdata{:})']);
+  func = eval(['@(x)',HesFileName,'(x,varargin{:})']);
 else
   func = str2func(HesFileName);
 end
